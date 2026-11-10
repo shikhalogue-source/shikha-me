@@ -2,6 +2,13 @@
    Shikha Jaswal: portfolio
    ===================================================================== */
 
+/* ---------- Fonts: Century Gothic Paneuropean (self-hosted) ---------- */
+@font-face { font-family: "Century Gothic Paneuropean"; src: url("../assets/fonts/century-gothic-regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Century Gothic Paneuropean"; src: url("../assets/fonts/century-gothic-italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Century Gothic Paneuropean"; src: url("../assets/fonts/century-gothic-semibold.ttf") format("truetype"); font-weight: 500 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Century Gothic Paneuropean"; src: url("../assets/fonts/century-gothic-bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Century Gothic Paneuropean"; src: url("../assets/fonts/century-gothic-black.ttf") format("truetype"); font-weight: 800 900; font-style: normal; font-display: swap; }
+
 /* ---------- Tokens & fluid scaling ---------- */
 :root {
   --light-bg: #f9efe7;
@@ -14,9 +21,9 @@
   --divider: #d9d9d9;
   --divider-dark: #34332f;
 
-  --font-sans: 'Geist', Arial, sans-serif;
+  --font-sans: "Century Gothic Paneuropean", "Century Gothic", Futura, "Avenir Next", Arial, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
-  --font-display: 'Funnel Display', 'Geist', Arial, sans-serif;
+  --font-display: "Century Gothic Paneuropean", "Century Gothic", Futura, Arial, sans-serif;
 
   --ease-out: cubic-bezier(.16, 1, .3, 1);
   --ease-in-out: cubic-bezier(.76, 0, .24, 1);
@@ -43,7 +50,7 @@ html { -webkit-text-size-adjust: 100%; background: var(--light-bg); }
 body {
   font-family: var(--font-sans);
   font-size: var(--size-font);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.4;
   color: var(--dark-bg);
   background: var(--light-bg);
@@ -126,7 +133,7 @@ a:hover .roll__c, button:hover .roll__c, [data-roll-hover]:hover .roll__c { tran
 .loader { position: fixed; inset: 0; z-index: 150; pointer-events: none; }
 .loader__bg { position: absolute; inset: 0; background: var(--light-bg); }
 .loader__inner { position: absolute; inset: 0; display: grid; place-items: center; }
-.loader__word { grid-area: 1 / 1; font-family: var(--font-display); font-weight: 700; font-size: 3.2em; letter-spacing: -.045em; line-height: 1; visibility: hidden; }
+.loader__word { grid-area: 1 / 1; font-family: var(--font-display); font-weight: 900; font-size: 3.2em; letter-spacing: -.045em; line-height: 1; visibility: hidden; }
 .loader__bar { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 2em; height: 1px; background: rgba(28,28,27,.12); }
 .loader__progress { height: 100%; background: var(--dark-bg); transform: scaleX(0); transform-origin: left; }
 .loader.is-done { display: none; }
@@ -178,7 +185,7 @@ a:hover .roll__c, button:hover .roll__c, [data-roll-hover]:hover .roll__c { tran
 .hero__scroll { color: var(--p-dark); }
 
 .bigname {
-  font-family: var(--font-display); font-weight: 700; letter-spacing: -.055em; line-height: .78;
+  font-family: var(--font-display); font-weight: 900; letter-spacing: -.055em; line-height: .78;
   white-space: nowrap; display: flex; justify-content: space-between; gap: .25em;
   font-size: 15vw; /* refined by JS to fit the width exactly */
   padding-top: .06em;
