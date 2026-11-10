@@ -57,11 +57,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
+  text-transform: lowercase; /* her style: everything in lower case */
 }
 h1, h2, h3, h4, p, figure, dl, dd, ol, ul { margin: 0; padding: 0; }
 ol, ul { list-style: none; }
 a { color: inherit; text-decoration: none; }
-button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button { font: inherit; color: inherit; text-transform: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 img, video { display: block; max-width: 100%; }
 ::selection { background: var(--tag-bg); color: var(--dark-bg); }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
@@ -90,7 +91,7 @@ html.js:not(.is-ready) body[data-page="project"]::after { background: var(--dark
 .container { position: relative; z-index: 1; width: 100%; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
 .grid-12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
 .section-dark { background: var(--dark-bg); color: var(--light-bg); }
-.mono { font-family: var(--font-mono); font-size: .75em; font-weight: 400; text-transform: uppercase; letter-spacing: .01em; line-height: 1.2; }
+.mono { font-family: var(--font-mono); font-size: .75em; font-weight: 400; text-transform: lowercase; letter-spacing: .01em; line-height: 1.2; }
 .muted { color: var(--p); }
 
 .label-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-items: center; margin-bottom: 2.5em; }
@@ -190,7 +191,7 @@ a:hover .roll__c, button:hover .roll__c, [data-roll-hover]:hover .roll__c { tran
   font-family: var(--font-display); font-weight: 900; letter-spacing: -.055em; line-height: .78;
   white-space: nowrap; display: flex; justify-content: center; gap: .25em;
   font-size: 15vw; /* refined by JS to fit the width exactly */
-  padding-top: .06em;
+  padding-top: .34em;
 }
 .bigname__word { display: inline-flex; }
 .bigname .char-mask { overflow: clip; display: inline-block; padding: .3em 0 .2em; margin: -.3em 0 -.2em; }
@@ -295,7 +296,7 @@ a:hover .roll__c, button:hover .roll__c, [data-roll-hover]:hover .roll__c { tran
 .about__lead { font-size: 2.3em; font-weight: 600; letter-spacing: -.045em; line-height: 1.08; }
 .about__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75em var(--gap); border-top: 1px solid var(--divider); padding-top: 1.75em; }
 .about__facts div { display: flex; flex-direction: column; gap: .5em; }
-.about__facts dt { font-family: var(--font-mono); font-size: .75em; text-transform: uppercase; color: var(--p-dark); }
+.about__facts dt { font-family: var(--font-mono); font-size: .75em; text-transform: lowercase; color: var(--p-dark); }
 .about__facts dd { font-size: 1.05em; line-height: 1.3; letter-spacing: -.02em; }
 .about__photos { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); margin-top: 9em; align-items: start; }
 .about__photo { display: flex; flex-direction: column; gap: .7em; }
@@ -388,7 +389,7 @@ a:hover .roll__c, button:hover .roll__c, [data-roll-hover]:hover .roll__c { tran
 .modal__row:last-child { border-bottom: 1px solid var(--lighter-black); }
 .modal__row .mono { color: var(--p); font-size: .55em; }
 .modal__row-left { display: flex; flex-direction: column; gap: .2em; }
-.modal__copy { font-family: var(--font-mono); font-size: .55em; text-transform: uppercase; padding: .6em .7em; border-radius: 2px; background: var(--lighter-black); white-space: nowrap; }
+.modal__copy { font-family: var(--font-mono); font-size: .55em; text-transform: lowercase; padding: .6em .7em; border-radius: 2px; background: var(--lighter-black); white-space: nowrap; }
 .modal__arrow { width: .7em; height: .7em; transition: transform .5s var(--ease-out); }
 .modal__row:hover .modal__arrow { transform: rotate(45deg); }
 
@@ -412,7 +413,7 @@ body[data-page="project"] .transition__row { transform: scaleY(1); }
 .cs-intro { grid-column: 1 / 8; font-size: 1.6em; font-weight: 600; letter-spacing: -.045em; line-height: 1.15; }
 .cs-facts { grid-column: 9 / 13; display: flex; flex-direction: column; gap: 1.25em; }
 .cs-facts div { display: grid; grid-template-columns: 7em 1fr; gap: 1em; align-items: baseline; }
-.cs-facts dt { font-family: var(--font-mono); font-size: .75em; text-transform: uppercase; color: var(--p-dark); }
+.cs-facts dt { font-family: var(--font-mono); font-size: .75em; text-transform: lowercase; color: var(--p-dark); }
 .cs-facts dd { letter-spacing: -.02em; line-height: 1.3; }
 .cs-facts .work__tags { margin-top: .25em; }
 .cs-facts .btn { align-self: flex-start; margin-top: .5em; }

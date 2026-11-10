@@ -236,7 +236,7 @@
     const next = S.projects[(idx + 1) % S.projects.length];
     const total = S.projects.length;
 
-    document.title = `${p.title} | ${S.name}`;
+    document.title = `${p.title} | ${S.name}`.toLowerCase();
     const md = $('meta[name="description"]'); if (md) md.setAttribute('content', p.summary);
     const ogt = $('meta[property="og:title"]'); if (ogt) ogt.setAttribute('content', `${p.title} | ${S.name}`);
 
