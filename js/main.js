@@ -141,8 +141,11 @@
 
     $('[data-sticky-inner]').innerHTML = S.statements.map((t) => `<h2 class="sticky__el">${esc(t)}</h2>`).join('');
 
-    // Work
-    $('[data-work-list]').innerHTML = S.projects.map((p, i) => {
+    // Work: featured projects get the big rows, the rest go to "Other projects"
+    const featured = S.projects.filter((p) => p.featured !== false);
+    const others = S.projects.filter((p) => p.featured === false);
+
+    $('[data-work-list]').innerHTML = featured.map((p, i) => {
       const hover = p.hover?.video
         ? `<video class="work__video" data-src="${p.hover.video}" muted loop playsinline preload="none" aria-hidden="true"></video>`
         : p.hover?.images
@@ -170,6 +173,22 @@
         </a>
         <div class="work__divider-row"><div class="work__divider" data-divider></div></div>`;
     }).join('');
+
+    // Other projects: compact list with a floating preview on hover
+    const othersSection = $('[data-others]');
+    if (!others.length) othersSection.remove();
+    else {
+      $('[data-others-list]').innerHTML = others.map((p, i) => `
+        <a class="others__item" href="work.html?p=${encodeURIComponent(p.slug)}" data-page-link data-other="${i}" data-fade>
+          <span class="others__num mono">${pad(featured.length + i + 1)}</span>
+          <span class="others__thumb" aria-hidden="true"><img src="${p.cover.src}" alt="" loading="lazy" decoding="async" style="object-position:${p.cover.position || '50% 50%'}"></span>
+          <span class="others__title">${esc(p.title)}</span>
+          <span class="others__meta"><span class="mono">${esc(p.year)}</span><span class="others__tags">${p.tags.map(esc).join(' · ')}</span></span>
+          <svg class="others__arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M9 3H4M9 3V8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        </a>`).join('');
+      $('[data-others-preview]').innerHTML = others.map((p) =>
+        `<img src="${p.cover.src}" alt="" loading="lazy" decoding="async" style="object-position:${p.cover.position || '50% 50%'}">`).join('');
+    }
 
     // About
     const A = S.about;
@@ -485,8 +504,8 @@
     const text = $('[data-hero-text]');
     const lines = SplitText.create([title, text], { type: 'lines', mask: 'lines', linesClass: 'hline' }).lines;
     const nameChars = $$('[data-hero-name] .char');
-    gsap.set(lines, { yPercent: 110 });
-    gsap.set(nameChars, { yPercent: 105 });
+    gsap.set(lines, { yPercent: 135 });
+    gsap.set(nameChars, { yPercent: 170 });
     gsap.set('[data-hero-divider]', { scaleX: 0 });
     gsap.set('.hero__label-row > *', { autoAlpha: 0, y: 8 });
     gsap.set('[data-nav] > *', { autoAlpha: 0, y: -8 });
@@ -515,13 +534,13 @@
     const words = $$('[data-loader-word]', loader);
     const splits = words.map((w) => SplitText.create(w, { type: 'chars', mask: 'chars' }));
     gsap.set(words, { visibility: 'visible' });
-    gsap.set(splits.flatMap((s) => s.chars), { yPercent: 120 });
+    gsap.set(splits.flatMap((s) => s.chars), { yPercent: 150 });
     lenis?.stop();
 
     const tl = gsap.timeline({ onComplete: () => { loader.classList.add('is-done'); lenis?.start(); } });
     tl.to('[data-loader-progress]', { scaleX: 1, duration: 2.3, ease: 'power3.inOut' }, 0)
       .to(splits[0].chars, { yPercent: 0, duration: 0.75, stagger: 0.035, ease: 'expo.out' }, 0.1)
-      .to(splits[0].chars, { yPercent: -120, duration: 0.5, stagger: 0.025, ease: 'expo.in' }, 2.3)
+      .to(splits[0].chars, { yPercent: -150, duration: 0.5, stagger: 0.025, ease: 'expo.in' }, 2.3)
       .to('.loader__bar', { autoAlpha: 0, duration: 0.3 }, 2.35)
       .to('[data-loader-bg]', { yPercent: -101, duration: 1.1, ease: 'expo.inOut' }, 2.6)
       .add(done, 2.95);
@@ -572,7 +591,7 @@
       SplitText.create(h, {
         type: 'lines', mask: 'lines', autoSplit: true, linesClass: 'sline',
         onSplit: (self) => gsap.from(self.lines, {
-          yPercent: 110, duration: 1.1, stagger: 0.08, ease: 'expo.out',
+          yPercent: 135, duration: 1.1, stagger: 0.08, ease: 'expo.out',
           scrollTrigger: { trigger: h, start: 'top 88%', once: true },
         }),
       });
@@ -630,6 +649,37 @@
   /* ===================================================================
      WORK: hover video / slideshow, custom cursor
      =================================================================== */
+  function initOthers() {
+    const list = $('[data-others-list]');
+    const preview = $('[data-others-preview]');
+    if (!list || !preview || !finePointer) return;
+    const imgs = $$('img', preview);
+    const xTo = gsap.quickTo(preview, 'x', { duration: 0.6, ease: 'power3' });
+    const yTo = gsap.quickTo(preview, 'y', { duration: 0.6, ease: 'power3' });
+    let active = -1;
+    gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0.6, autoAlpha: 0 });
+
+    const show = (i) => {
+      if (i === active) return;
+      active = i;
+      imgs.forEach((im, k) => im.classList.toggle('is-active', k === i));
+      gsap.to(preview, { scale: 1, autoAlpha: 1, duration: 0.5, ease: 'expo.out', overwrite: 'auto' });
+    };
+    const hide = () => {
+      active = -1;
+      gsap.to(preview, { scale: 0.6, autoAlpha: 0, duration: 0.4, ease: 'expo.out', overwrite: 'auto' });
+    };
+    list.addEventListener('mousemove', (e) => { xTo(e.clientX); yTo(e.clientY); });
+    $$('[data-other]', list).forEach((row) => {
+      row.addEventListener('mouseenter', (e) => {
+        gsap.set(preview, { x: e.clientX, y: e.clientY });
+        list.classList.add('is-hovering');
+        show(+row.dataset.other);
+      });
+    });
+    list.addEventListener('mouseleave', () => { list.classList.remove('is-hovering'); hide(); });
+  }
+
   function initWork() {
     $$('[data-work-item]').forEach((item) => {
       const video = $('.work__video', item);
@@ -805,7 +855,7 @@
         .fromTo('[data-footer-dark]', { opacity: 0.55 }, { opacity: 0, ease: 'none' }, 0);
     }
     const chars = $$('[data-footer-name] .char');
-    gsap.fromTo(chars, { yPercent: 105 }, {
+    gsap.fromTo(chars, { yPercent: 170 }, {
       yPercent: 0, duration: 1.3, stagger: 0.035, ease: 'expo.out',
       scrollTrigger: { trigger: '[data-footer-name]', start: 'top 98%', once: true },
     });
@@ -888,8 +938,8 @@
     const intro = $('[data-cs-intro]');
     const t = SplitText.create(title, { type: 'lines,words', mask: 'lines' });
     const i = SplitText.create(intro, { type: 'lines', mask: 'lines' });
-    gsap.set(t.words, { yPercent: 110 });
-    gsap.set(i.lines, { yPercent: 110 });
+    gsap.set(t.words, { yPercent: 135 });
+    gsap.set(i.lines, { yPercent: 135 });
     gsap.set(['.cs-hero__top > *', '[data-nav] > *'], { autoAlpha: 0, y: 8 });
     return () => {
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
@@ -936,6 +986,7 @@
         playIntro = prepareHero();
         initSticky();
         initWork();
+        initOthers();
         initAbout();
         initServices();
         initFaq();

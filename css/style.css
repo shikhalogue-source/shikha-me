@@ -125,6 +125,8 @@ a:hover .roll__c, button:hover .roll__c, [data-roll-hover]:hover .roll__c { tran
 .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* Split-text helpers */
+/* SplitText masks: give tall ascenders and descenders room so nothing gets sliced */
+[style*="overflow: clip"] { padding-top: .16em; padding-bottom: .2em; margin-top: -.16em; margin-bottom: -.2em; }
 .line-mask { overflow: clip; padding-bottom: .08em; margin-bottom: -.08em; }
 
 /* =====================================================================
@@ -186,12 +188,12 @@ a:hover .roll__c, button:hover .roll__c, [data-roll-hover]:hover .roll__c { tran
 
 .bigname {
   font-family: var(--font-display); font-weight: 900; letter-spacing: -.055em; line-height: .78;
-  white-space: nowrap; display: flex; justify-content: space-between; gap: .25em;
+  white-space: nowrap; display: flex; justify-content: center; gap: .25em;
   font-size: 15vw; /* refined by JS to fit the width exactly */
   padding-top: .06em;
 }
 .bigname__word { display: inline-flex; }
-.bigname .char-mask { overflow: clip; display: inline-block; padding-bottom: .2em; margin-bottom: -.2em; }
+.bigname .char-mask { overflow: clip; display: inline-block; padding: .3em 0 .2em; margin: -.3em 0 -.2em; }
 .bigname .char { display: inline-block; will-change: transform; }
 
 /* =====================================================================
@@ -244,6 +246,30 @@ a:hover .roll__c, button:hover .roll__c, [data-roll-hover]:hover .roll__c { tran
 .work__tags { display: flex; flex-wrap: wrap; gap: .5em; }
 .work__divider-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
 .work__divider { grid-column: 3 / 13; height: 1px; background: var(--divider); margin: 2.5em 0; transform-origin: left center; }
+
+/* Other projects: compact list */
+.others { position: relative; background: var(--light-bg); padding: 2em 0 4em; }
+.others__list { border-bottom: 1px solid var(--divider); }
+.others__item {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-items: center;
+  padding: 1.6em 0; border-top: 1px solid var(--divider); letter-spacing: -.03em;
+  transition: opacity .45s;
+}
+.others__num { grid-column: 1 / 3; color: var(--p-dark); }
+.others__thumb { display: none; }
+.others__title { grid-column: 3 / 9; font-size: 2.6em; font-weight: 600; line-height: 1.05; transition: transform .6s var(--ease-out); }
+.others__meta { grid-column: 9 / 12; display: flex; flex-direction: column; gap: .4em; color: var(--p-dark); line-height: 1.3; }
+.others__arrow { grid-column: 12 / 13; justify-self: end; width: 1.4em; height: 1.4em; transition: transform .6s var(--ease-out); }
+.others__list.is-hovering .others__item { opacity: .35; }
+.others__list.is-hovering .others__item:hover { opacity: 1; }
+.others__item:hover .others__title { transform: translateX(.35em); }
+.others__item:hover .others__arrow { transform: rotate(45deg); }
+.others__preview {
+  position: fixed; top: 0; left: 0; z-index: 40; pointer-events: none;
+  width: 22em; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 2px; visibility: hidden;
+}
+.others__preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s; }
+.others__preview img.is-active { opacity: 1; }
 
 /* Custom cursor */
 .cursor { position: fixed; top: 0; left: 0; z-index: 90; pointer-events: none; }
@@ -466,6 +492,14 @@ body[data-page="project"] .transition__row { transform: scaleY(1); }
   .work__desc { gap: 1.5em; }
   .work__head { gap: 1em; }
   .work__title { font-size: 1.8em; }
+  .others__item { grid-template-columns: 5.5em 1fr auto; column-gap: 1em; row-gap: .3em; padding: 1.1em 0; }
+  .others__num { display: none; }
+  .others__thumb { display: block; grid-column: 1; grid-row: 1 / 3; aspect-ratio: 1; overflow: hidden; border-radius: 2px; }
+  .others__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .others__title { grid-column: 2; grid-row: 1; font-size: 1.6em; }
+  .others__meta { grid-column: 2; grid-row: 2; font-size: .9em; }
+  .others__arrow { grid-column: 3; grid-row: 1 / 3; align-self: center; width: 1.1em; height: 1.1em; }
+  .others__preview { display: none; }
   .about { padding-bottom: 12em; }
   .about__portrait { grid-column: 1 / 13; aspect-ratio: 4 / 5; margin-bottom: 2.5em; }
   .about__content { grid-column: 1 / 13; }

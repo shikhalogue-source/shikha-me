@@ -113,6 +113,7 @@ window.SITE = {
      cover   : image on the home grid (and top of the case study)
      hero    : optional wide image for the top of the case study
      hover   : { video: '...' } or { images: [...] } plays on hover
+     featured: false  moves a project into the smaller "Other projects" list
      blocks  : the case-study page, top to bottom. Types:
                full  { src, alt, caption?, w?, h? }
                pair  { items: [{src, alt, caption?}, {...}], ratio? }
@@ -167,41 +168,6 @@ window.SITE = {
         { type: 'pair', items: [
           { src: 'assets/img/nirmano/deck-02.jpg', alt: 'Pitch deck welcome page describing nirmano as a boutique design studio' },
           { src: 'assets/img/nirmano/deck-07.jpg', alt: 'Pitch deck services and packages page' },
-        ] },
-      ],
-    },
-
-    {
-      slug: 'house-of-ambika',
-      title: 'House of Ambika',
-      year: 'June 2025',
-      role: 'Brand identity, art direction & self-portraiture',
-      context: 'Ancestor Project',
-      tags: ['Brand Identity', 'Art Direction', 'Photography'],
-      summary: 'A platform for ancestral remembrance and feminine empowerment, plus Becoming Mata Ambika, a self-portrait series recreating a Kangra painting of the goddess.',
-      cover: { src: 'assets/img/ambika/brand-01.jpg', alt: 'House of Ambika cover: Shikha in a pink silk saree against blue and red drapes', position: '50% 30%' },
-      hover: { images: ['assets/img/ambika/self-04.jpg', 'assets/img/ambika/brand-08.jpg', 'assets/img/ambika/self-05.jpg'] },
-      intro: 'Originally inspired by the mythic discovery of my link to the goddess Ambika, House of Ambika has grown into a sacred creative project: a visual and community platform for ancestral remembrance and feminine empowerment. Through storytelling, ritual and design, it reclaims what was once unknown and passes it forward.',
-      blocks: [
-        { type: 'full', src: 'assets/img/ambika/brand-07.jpg', alt: 'House of Ambika vision board with palace architecture and the emblem' },
-        { type: 'text', title: 'Mission', body: 'To awaken ancestral memory through art, ritual and community, preserving ancient knowledge to empower the women of today and tomorrow. The brand rests on four pillars: remembrance, ritual, radiance and sisterhood.' },
-        { type: 'pair', items: [
-          { src: 'assets/img/ambika/brand-03.jpg', alt: 'Namaste page with the Ambika Mata painting' },
-          { src: 'assets/img/ambika/brand-04.jpg', alt: 'The four pillars of House of Ambika' },
-        ] },
-        { type: 'full', src: 'assets/img/ambika/brand-05.jpg', alt: 'House of Ambika moodboard of textiles, jewellery and Kangra art', caption: 'Moodboard' },
-        { type: 'full', src: 'assets/img/ambika/brand-06.jpg', alt: 'Logo, colour palette and typography for House of Ambika', caption: 'Kangra-art inspired emblem, palette and type' },
-        { type: 'text', title: 'Becoming Mata Ambika', body: 'A self-portrait series extending the Ancestor Project. It recreates the painting of Mata Ambika, the divine origin of the Katoch lineage, using light, fabric, gesture and quiet.' },
-        { type: 'pair', items: [
-          { src: 'assets/img/ambika/self-02.jpg', alt: 'Source image: the Ambika Mata painting', caption: 'Source image' },
-          { src: 'assets/img/ambika/self-03.jpg', alt: 'The recreated portrait of Mata Ambika', caption: 'Recreated portrait' },
-        ] },
-        { type: 'full', src: 'assets/img/ambika/self-04.jpg', alt: 'Three self-portraits of Shikha in a pink saree' },
-        { type: 'quote', text: 'This series allowed me to go beyond historical documentation and step into imaginative memory. I used light, fabric, gesture, and quiet to build a bridge between myself and the women I’ll never meet, but still remember.', cite: 'shikha' },
-        { type: 'full', src: 'assets/img/ambika/self-05.jpg', alt: 'Self-portrait details: veil, hands, and ritual objects' },
-        { type: 'pair', items: [
-          { src: 'assets/img/ambika/brand-08.jpg', alt: 'Photo shoot inspired by Ambika Mata, spread one' },
-          { src: 'assets/img/ambika/brand-09.jpg', alt: 'Photo shoot inspired by Ambika Mata, spread two' },
         ] },
       ],
     },
@@ -276,7 +242,44 @@ window.SITE = {
     },
 
     {
+      slug: 'house-of-ambika',
+      featured: false, // shown under "Other projects"
+      title: 'House of Ambika',
+      year: 'June 2025',
+      role: 'Brand identity, art direction & self-portraiture',
+      context: 'Ancestor Project',
+      tags: ['Brand Identity', 'Art Direction', 'Photography'],
+      summary: 'A platform for ancestral remembrance and feminine empowerment, plus Becoming Mata Ambika, a self-portrait series recreating a Kangra painting of the goddess.',
+      cover: { src: 'assets/img/ambika/brand-01.jpg', alt: 'House of Ambika cover: Shikha in a pink silk saree against blue and red drapes', position: '62% 25%' },
+      hover: { images: ['assets/img/ambika/self-04.jpg', 'assets/img/ambika/brand-08.jpg', 'assets/img/ambika/self-05.jpg'] },
+      intro: 'Originally inspired by the mythic discovery of my link to the goddess Ambika, House of Ambika has grown into a sacred creative project: a visual and community platform for ancestral remembrance and feminine empowerment. Through storytelling, ritual and design, it reclaims what was once unknown and passes it forward.',
+      blocks: [
+        { type: 'full', src: 'assets/img/ambika/brand-07.jpg', alt: 'House of Ambika vision board with palace architecture and the emblem' },
+        { type: 'text', title: 'Mission', body: 'To awaken ancestral memory through art, ritual and community, preserving ancient knowledge to empower the women of today and tomorrow. The brand rests on four pillars: remembrance, ritual, radiance and sisterhood.' },
+        { type: 'pair', items: [
+          { src: 'assets/img/ambika/brand-03.jpg', alt: 'Namaste page with the Ambika Mata painting' },
+          { src: 'assets/img/ambika/brand-04.jpg', alt: 'The four pillars of House of Ambika' },
+        ] },
+        { type: 'full', src: 'assets/img/ambika/brand-05.jpg', alt: 'House of Ambika moodboard of textiles, jewellery and Kangra art', caption: 'Moodboard' },
+        { type: 'full', src: 'assets/img/ambika/brand-06.jpg', alt: 'Logo, colour palette and typography for House of Ambika', caption: 'Kangra-art inspired emblem, palette and type' },
+        { type: 'text', title: 'Becoming Mata Ambika', body: 'A self-portrait series extending the Ancestor Project. It recreates the painting of Mata Ambika, the divine origin of the Katoch lineage, using light, fabric, gesture and quiet.' },
+        { type: 'pair', items: [
+          { src: 'assets/img/ambika/self-02.jpg', alt: 'Source image: the Ambika Mata painting', caption: 'Source image' },
+          { src: 'assets/img/ambika/self-03.jpg', alt: 'The recreated portrait of Mata Ambika', caption: 'Recreated portrait' },
+        ] },
+        { type: 'full', src: 'assets/img/ambika/self-04.jpg', alt: 'Three self-portraits of Shikha in a pink saree' },
+        { type: 'quote', text: 'This series allowed me to go beyond historical documentation and step into imaginative memory. I used light, fabric, gesture, and quiet to build a bridge between myself and the women I’ll never meet, but still remember.', cite: 'shikha' },
+        { type: 'full', src: 'assets/img/ambika/self-05.jpg', alt: 'Self-portrait details: veil, hands, and ritual objects' },
+        { type: 'pair', items: [
+          { src: 'assets/img/ambika/brand-08.jpg', alt: 'Photo shoot inspired by Ambika Mata, spread one' },
+          { src: 'assets/img/ambika/brand-09.jpg', alt: 'Photo shoot inspired by Ambika Mata, spread two' },
+        ] },
+      ],
+    },
+
+    {
       slug: 'liulic',
+      featured: false, // shown under "Other projects"
       title: 'Liulic',
       year: '2024',
       role: 'Brand identity & mockups',
